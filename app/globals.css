@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { overflow-x: hidden; }
+nav ul { scrollbar-width: none; }
+nav::-webkit-scrollbar { display: none; }
+nav { scrollbar-width: none; }
+
+body {
+  background-color: #fffbe6;
+  background-image:
+    radial-gradient(circle at 10% 8%, rgba(56,163,216,.18), transparent 35%),
+    radial-gradient(circle at 92% 30%, rgba(46,139,87,.16), transparent 38%),
+    radial-gradient(circle at 8% 70%, rgba(251,191,36,.30), transparent 40%),
+    radial-gradient(circle at 90% 95%, rgba(56,163,216,.16), transparent 35%),
+    linear-gradient(180deg, #fff7c2 0%, #ffffff 35%, #fff4b0 70%, #ffffff 100%);
+  background-attachment: fixed;
+}
+
+@keyframes fall { 0% { transform: translate3d(0,-10vh,0) rotate(0); opacity: 0; } 10% { opacity: .9; } 100% { transform: translate3d(var(--dx),110vh,0) rotate(540deg); opacity: .9; } }
+@keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+.text-shimmer { background: linear-gradient(90deg,#1e5fa8,#2e8b57,#f59e0b,#1e5fa8); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 6s linear infinite; }
+
+@layer components {
+  .section { @apply relative mx-auto w-full max-w-5xl px-5 py-20 sm:px-8 sm:py-28; }
+  .heading { @apply font-serif text-3xl text-maroon sm:text-4xl md:text-5xl; }
+  .eyebrow { @apply font-sans text-xs uppercase tracking-[0.35em] text-gold; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Illustration & ambient animations */
+.sway { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 4s ease-in-out infinite alternate; }
+.sway-slow { transform-box: fill-box; transform-origin: 50% 0%; animation: sway 5s ease-in-out infinite alternate; }
+@keyframes sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+.bless { transform-box: fill-box; transform-origin: 0% 100%; animation: bless 2.4s ease-in-out infinite; }
+@keyframes bless { 50% { transform: translateY(-7px) rotate(-3deg); } }
+.bow { transform-box: fill-box; transform-origin: 50% 100%; animation: bow 4.8s ease-in-out infinite; }
+@keyframes bow { 50% { transform: rotate(4deg); } }
+.twinkle { animation: twinkle 2.2s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: .25; } }
+.floaty { animation: floaty 5s ease-in-out infinite; }
+@keyframes floaty { 50% { transform: translateY(-10px); } }
+.spin-slow { animation: spin 14s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .sway, .sway-slow, .bless, .bow, .twinkle, .floaty, .spin-slow { animation: none; }
+}
+
+.rise { animation: rise 3.6s ease-out infinite; opacity: 0; }
+@keyframes rise { 0% { transform: translateY(190px) scale(.6); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-10px) scale(1.1); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .rise { animation: none; opacity: 1; } }
+
+.blink { transform-box: fill-box; transform-origin: center; animation: blink 4s infinite; }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+.nod { animation: nod 4s ease-in-out infinite; }
+@keyframes nod { 50% { transform: rotate(2deg) translateY(-3px); } }
+.garland { animation: garland 3.6s ease-in-out infinite; }
+@keyframes garland { 0%, 100% { transform: translate(-34px, 0) rotate(-3deg); } 50% { transform: translate(34px, -8px) rotate(3deg); } }
+.drop { animation: drop 5s linear infinite; opacity: 0; }
+@keyframes drop { 0% { transform: translateY(0) rotate(0); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(330px) translateX(24px) rotate(360deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .blink, .nod, .garland, .drop { animation: none; } .drop { opacity: 1; } }
+
+.flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.4s ease-in-out infinite; }
+@keyframes flicker { 0%,100% { transform: scale(1,1) rotate(0); } 30% { transform: scale(.92,1.08) rotate(-2deg); } 60% { transform: scale(1.06,.95) rotate(2deg); } }
+.glow { transform-box: fill-box; transform-origin: center; animation: glow 2.6s ease-in-out infinite; }
+@keyframes glow { 50% { transform: scale(1.18); opacity: .7; } }
+@media (prefers-reduced-motion: reduce) { .flame, .glow { animation: none; } }
+
+.bounce { transform-box: fill-box; transform-origin: 50% 100%; animation: bounce .7s ease-in-out infinite; }
+@keyframes bounce { 50% { transform: translateY(-7px) scale(1.04,.96); } }
+.stick-l { transform-box: fill-box; transform-origin: 100% 100%; animation: stickl .7s ease-in-out infinite; }
+.stick-r { transform-box: fill-box; transform-origin: 0% 100%; animation: stickr .7s ease-in-out infinite .35s; }
+@keyframes stickl { 50% { transform: rotate(-28deg); } }
+@keyframes stickr { 50% { transform: rotate(28deg); } }
+.note { animation: note 2.4s ease-out infinite; opacity: 0; }
+@keyframes note { 0% { transform: translate(0,10px); opacity: 0; } 20% { opacity: 1; } 100% { transform: translate(12px,-26px); opacity: 0; } }
+.ring-l { transform-box: fill-box; transform-origin: center; animation: ringl 4s ease-in-out infinite; }
+.ring-r { transform-box: fill-box; transform-origin: center; animation: ringr 4s ease-in-out infinite; }
+@keyframes ringl { 50% { transform: translateX(8px) rotate(20deg); } }
+@keyframes ringr { 50% { transform: translateX(-8px) rotate(-20deg); } }
+.steam { animation: steam 2.6s ease-out infinite; opacity: 0; }
+@keyframes steam { 0% { transform: translateY(6px); opacity: 0; } 30% { opacity: .8; } 100% { transform: translateY(-14px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .bounce, .stick-l, .stick-r, .ring-l, .ring-r { animation: none; } .note, .steam { animation: none; opacity: .8; } }
